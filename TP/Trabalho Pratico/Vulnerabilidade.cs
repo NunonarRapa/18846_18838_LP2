@@ -69,7 +69,7 @@ namespace Trabalho_Pratico
 
         public override string ToString()
         {
-            return string.Format("Codigo: {0} \n Descricao: {1} \n Estado: {2} \n Nivel de Impacto: {3} \n", Codigo, Descricao, Ativo, NivelImpacto);
+            return string.Format("Codigo: {0} \nDescricao: {1} \nEstado: {2} \nNivel de Impacto: {3}\n", codigo, descricao, ativo, nivelImpacto);
         }
 
         #endregion
@@ -87,6 +87,5 @@ namespace Trabalho_Pratico
         }
 
         #endregion
-        
     }
 }

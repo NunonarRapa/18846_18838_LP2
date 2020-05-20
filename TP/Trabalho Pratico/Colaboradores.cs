@@ -9,20 +9,15 @@ namespace Trabalho_Pratico
         #region Member Variables
 
         const int MAXCOLABORADORES = 200;
-        static Colaborador[] colaboradores;
+        static List<Colaborador> colaboradores;
         static int totColaboradores;
-
-
         #endregion
 
         #region Constructors
-
         static Colaboradores()
         {
-            colaboradores = new Colaborador[MAXCOLABORADORES];
-            totColaboradores = 0;
+            colaboradores = new List<Colaborador>();
         }
-
         #endregion
 
         #region Functions
@@ -57,8 +52,8 @@ namespace Trabalho_Pratico
 
         public Colaborador this[int i]
         {
-            get { return colaboradores[i]; }
-            set { colaboradores[i] = value; }
+            get { if (i < MAXCOLABORADORES) return colaboradores[i]; return null; }
+            set { if (i < MAXCOLABORADORES) colaboradores[i] = value; totColaboradores = colaboradores.Count; }
         }
 
         #endregion

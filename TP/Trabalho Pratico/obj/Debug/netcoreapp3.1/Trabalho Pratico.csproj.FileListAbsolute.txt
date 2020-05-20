@@ -31,3 +31,16 @@ C:\Users\joao-\OneDrive\Documentos\TrabalhosCI\2Semestre\LP2\tplp2-master\tp\Tra
 C:\Users\joao-\OneDrive\Documentos\TrabalhosCI\2Semestre\LP2\tplp2-master\tp\Trabalho Pratico\obj\Debug\netcoreapp3.1\Trabalho Pratico.AssemblyInfo.cs
 C:\Users\joao-\OneDrive\Documentos\TrabalhosCI\2Semestre\LP2\tplp2-master\tp\Trabalho Pratico\obj\Debug\netcoreapp3.1\Trabalho Pratico.dll
 C:\Users\joao-\OneDrive\Documentos\TrabalhosCI\2Semestre\LP2\tplp2-master\tp\Trabalho Pratico\obj\Debug\netcoreapp3.1\Trabalho Pratico.pdb
+C:\Users\nuno1\OneDrive\Ambiente de Trabalho\TP\Trabalho Pratico\obj\Debug\netcoreapp3.1\Trabalho Pratico.csprojAssemblyReference.cache
+C:\Users\nuno1\OneDrive\Ambiente de Trabalho\TP\Trabalho Pratico\obj\Debug\netcoreapp3.1\Trabalho Pratico.csproj.CoreCompileInputs.cache
+C:\Users\nuno1\OneDrive\Ambiente de Trabalho\TP\Trabalho Pratico\obj\Debug\netcoreapp3.1\Trabalho Pratico.AssemblyInfoInputs.cache
+C:\Users\nuno1\OneDrive\Ambiente de Trabalho\TP\Trabalho Pratico\obj\Debug\netcoreapp3.1\Trabalho Pratico.AssemblyInfo.cs
+C:\Users\nuno1\OneDrive\Ambiente de Trabalho\TP\Trabalho Pratico\obj\Debug\netcoreapp3.1\Trabalho Pratico.dll
+C:\Users\nuno1\OneDrive\Ambiente de Trabalho\TP\Trabalho Pratico\obj\Debug\netcoreapp3.1\Trabalho Pratico.pdb
+C:\Users\nuno1\OneDrive\Ambiente de Trabalho\TP\Trabalho Pratico\bin\Debug\netcoreapp3.1\Trabalho Pratico.exe
+C:\Users\nuno1\OneDrive\Ambiente de Trabalho\TP\Trabalho Pratico\bin\Debug\netcoreapp3.1\Trabalho Pratico.deps.json
+C:\Users\nuno1\OneDrive\Ambiente de Trabalho\TP\Trabalho Pratico\bin\Debug\netcoreapp3.1\Trabalho Pratico.runtimeconfig.json
+C:\Users\nuno1\OneDrive\Ambiente de Trabalho\TP\Trabalho Pratico\bin\Debug\netcoreapp3.1\Trabalho Pratico.runtimeconfig.dev.json
+C:\Users\nuno1\OneDrive\Ambiente de Trabalho\TP\Trabalho Pratico\bin\Debug\netcoreapp3.1\Trabalho Pratico.dll
+C:\Users\nuno1\OneDrive\Ambiente de Trabalho\TP\Trabalho Pratico\bin\Debug\netcoreapp3.1\Trabalho Pratico.pdb
+C:\Users\nuno1\OneDrive\Ambiente de Trabalho\TP\Trabalho Pratico\obj\Debug\netcoreapp3.1\Trabalho Pratico.genruntimeconfig.cache

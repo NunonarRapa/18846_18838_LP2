@@ -56,7 +56,7 @@ namespace Trabalho_Pratico
 
         public override string ToString()
         {
-            return string.Format("Nome: {0} \n Codigo: {1} \n Ativo: {2}\n", Nome, Codigo, Ativo);
+            return string.Format("Colaborador: {0} \nCodigo: {1} \nAtivo: {2}\n", nome, codigo, ativo);
         }
 
         #endregion
@@ -73,7 +73,5 @@ namespace Trabalho_Pratico
             return (!c1.Equals(c2));
         }
         #endregion
-
-       
     }
 }

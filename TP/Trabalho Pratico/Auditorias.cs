@@ -9,21 +9,17 @@ namespace Trabalho_Pratico
         #region Member Variables
 
         const int MAXAUDITORIAS = 200;
-        static Auditoria[] auditorias;
+        static List<Auditoria> auditorias;
         static int totAuditorias;
         
         #endregion
 
         #region Constructors
-
-        public Auditorias()
+        static Auditorias()
         {
-            auditorias = new Auditoria[MAXAUDITORIAS];
-            totAuditorias = 0;
+            auditorias = new List<Auditoria>();
+            totAuditorias = auditorias.Count;
         }
-
-
-
         #endregion
 
         #region Properties
@@ -46,12 +42,26 @@ namespace Trabalho_Pratico
 
         public static bool AdicionaAuditoria(Auditoria a)
         {
-            if (totAuditorias >= MAXAUDITORIAS) return false;
+            try
+            {
+                Auditoria aux = new Auditoria(a.colaborador, a.data, a.duracao, (a.codigo-1));
+                aux.codigo = a.codigo;
+                aux.colaborador = a.colaborador;
+                aux.data = a.data;
+                aux.duracao = a.duracao;
+                aux.numeroVulnerabilidades = a.numeroVulnerabilidades;
 
-            if (VerificaExisteAuditoria(a)) return false;
+                if (totAuditorias >= MAXAUDITORIAS) return false;
 
-            auditorias[totAuditorias] = a;
-            totAuditorias++;
+                if (VerificaExisteAuditoria(aux)) return false;
+
+                auditorias.Add(aux);
+                totAuditorias = auditorias.Count;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
             return true;
         }
 
@@ -65,11 +75,10 @@ namespace Trabalho_Pratico
 
         public Auditoria this[int i]
         {
-            get { return auditorias[i]; }
-            set { auditorias[i] = value; }
+            get { if (i < MAXAUDITORIAS) return auditorias[i]; return null; }
+            set { if (i < MAXAUDITORIAS) auditorias[i] = value; totAuditorias = auditorias.Count; }
         }
 
         #endregion
-
     }
 }

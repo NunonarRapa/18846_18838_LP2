@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\nuno1\\OneDrive\\Ambiente de Trabalho\\18838_18846_LP2\\tp\\Trabalho Pratico\\Trabalho Pratico.csproj",
+      "projectUniqueName": "C:\\Users\\nuno1\\OneDrive\\Ambiente de Trabalho\\TP\\Trabalho Pratico\\Trabalho Pratico.csproj",
       "projectName": "Trabalho Pratico",
-      "projectPath": "C:\\Users\\nuno1\\OneDrive\\Ambiente de Trabalho\\18838_18846_LP2\\tp\\Trabalho Pratico\\Trabalho Pratico.csproj",
+      "projectPath": "C:\\Users\\nuno1\\OneDrive\\Ambiente de Trabalho\\TP\\Trabalho Pratico\\Trabalho Pratico.csproj",
       "packagesPath": "C:\\Users\\nuno1\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\nuno1\\OneDrive\\Ambiente de Trabalho\\18838_18846_LP2\\tp\\Trabalho Pratico\\obj\\",
+      "outputPath": "C:\\Users\\nuno1\\OneDrive\\Ambiente de Trabalho\\TP\\Trabalho Pratico\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

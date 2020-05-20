@@ -9,16 +9,14 @@ namespace Trabalho_Pratico
         #region MemberVariables
 
         const int MAXVULNERABILIDADES = 400;
-        static Vulnerabilidade[] vulnerabilidades;
+        static List<Vulnerabilidade> vulnerabilidades;
         static int totVulnerabilidades;
         #endregion
         
         #region Constructors
-
-        public Vulnerabilidades()
+        static Vulnerabilidades()
         {
-            vulnerabilidades = new Vulnerabilidade[MAXVULNERABILIDADES];
-            totVulnerabilidades = 0;
+            vulnerabilidades = new List<Vulnerabilidade>();
         }
         #endregion
 
@@ -54,8 +52,8 @@ namespace Trabalho_Pratico
 
         public Vulnerabilidade this[int i]
         {
-            get { return vulnerabilidades[i]; }
-            set { vulnerabilidades[i] = value; }
+            get { if (i < MAXVULNERABILIDADES) return vulnerabilidades[i]; return null; }
+            set { if (i < MAXVULNERABILIDADES) vulnerabilidades[i] = value; totVulnerabilidades = vulnerabilidades.Count; }
         }
 
 

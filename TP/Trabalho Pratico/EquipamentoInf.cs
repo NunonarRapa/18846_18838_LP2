@@ -8,7 +8,7 @@ namespace Trabalho_Pratico
     {
         #region MemberVariables 
         const int MAXVULEQUIPAMENTO = 20;
-        Vulnerabilidades vulnerabilidades;
+        static List<Vulnerabilidade> vulnerabilidades;
         int codigo;
         string tipo;
         string marca;
@@ -27,7 +27,7 @@ namespace Trabalho_Pratico
             modelo = mod;
             dataAquisicao = dat;
             numeroVulnerabilidades = 0;
-            vulnerabilidades = new Vulnerabilidades();
+            vulnerabilidades = new List<Vulnerabilidade>();
         }
 
 
@@ -69,16 +69,7 @@ namespace Trabalho_Pratico
             get { return numeroVulnerabilidades; }
         }
 
-
-        public Vulnerabilidades Vulnerabilidades
-        {
-            get { return vulnerabilidades; }
-            set { vulnerabilidades = value; }
-        }
-
-
         #endregion
-        
        
         #region Overrides
 
@@ -90,7 +81,7 @@ namespace Trabalho_Pratico
 
         public override string ToString()
         {
-            return string.Format("Codigo: {0} \n Tipo: {1} \n Marca: {2} \n Modelo: {3} \n Data: {4}", Codigo, Tipo, Marca, Modelo, DataAquisicao);
+            return string.Format("Codigo: {0} \nTipo: {1} \nMarca: {2} \nModelo: {3} \nData: {4}\n", codigo, tipo, marca, modelo, dataAquisicao);
         }
 
         #endregion

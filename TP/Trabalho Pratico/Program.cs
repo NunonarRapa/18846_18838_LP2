@@ -6,7 +6,22 @@ namespace Trabalho_Pratico
     {
         static void Main(string[] args)
         {
+            Auditorias audisss = new Auditorias();
 
+            Colaboradores colabs = new Colaboradores();
+
+            Colaborador col = new Colaborador("Rapa", 0);
+
+            Auditoria audi = new Auditoria(col, DateTime.Now, 10, 0);
+
+            Auditorias.AdicionaAuditoria(audi);
+
+            Console.WriteLine("{0}", audisss[0]);
+
+            Console.WriteLine("{0}", audisss[0].colaborador);
+
+
+            /*
             EquipamentosInf equipamentosInf = new EquipamentosInf();
 
             Vulnerabilidade vul;
@@ -33,7 +48,9 @@ namespace Trabalho_Pratico
 
             Console.WriteLine("{0}", vul.ToString());
 
-            Console.WriteLine("{0}", equipamentosInf[1].Vulnerabilidades[0].ToString());
+            Console.WriteLine("{0}", equipamentosInf[1].Vulnerabilidades[0].ToString());*/
+
+            Console.ReadKey();
         }
     }
 }

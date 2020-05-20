@@ -7,24 +7,24 @@ namespace Trabalho_Pratico
     class Auditoria
     {
         #region MemberVariables 
-     
-        int codigo;
-        DateTime data;
-        Colaborador colaborador;
-        float duracao;
-        int numeroVulnerabilidades;
+    
+        public int codigo;
+        public DateTime data;
+        public Colaborador colaborador;
+        public float duracao;
+        public int numeroVulnerabilidades;
 
         #endregion
 
         #region Constructors
 
-        public Auditoria(DateTime dat, float dur, int numAuditorias)
+        public Auditoria(Colaborador colab ,DateTime dat, float dur, int numAuditorias)
         {
+            colaborador = colab;
             data = dat;
             duracao = dur;
             codigo = numAuditorias + 1;
             numeroVulnerabilidades = 0;
-
         }
 
 
@@ -71,7 +71,7 @@ namespace Trabalho_Pratico
 
         public override string ToString()
         {
-            return string.Format("Codigo: {0} \n Data: {1} \n Colaborador: {2} \n Duracao: {3} \n", Codigo, Data, Colaborador, Duracao);
+            return string.Format("Codigo: {0} \nData: {1} \n{2}Duracao: {3}\n", codigo, data, colaborador, duracao);
         }
 
 

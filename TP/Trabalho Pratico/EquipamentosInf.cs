@@ -9,16 +9,14 @@ namespace Trabalho_Pratico
         #region MemberVariables
 
         const int MAXEQUIPAMENTOSINF = 200;
-        static EquipamentoInf[] equipamentoInfs;
+        static List<EquipamentoInf> equipamentoInfs;
         static int totEquipamentos;
         #endregion
 
         #region Constructors
-
-        public EquipamentosInf()
+        static EquipamentosInf()
         {
-            equipamentoInfs = new EquipamentoInf[MAXEQUIPAMENTOSINF];
-            totEquipamentos = 0;
+            equipamentoInfs = new List<EquipamentoInf>();
         }
         #endregion
         
@@ -58,8 +56,8 @@ namespace Trabalho_Pratico
 
         public EquipamentoInf this[int i]
         {
-            get { return equipamentoInfs[i];  }
-            set { equipamentoInfs[i] = value;  }
+            get { if (i < MAXEQUIPAMENTOSINF) return equipamentoInfs[i]; return null; }
+            set { if (i < MAXEQUIPAMENTOSINF) equipamentoInfs[i] = value; totEquipamentos = equipamentoInfs.Count; }
         }
 
         #endregion 
