@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace DL
 {
+    [Serializable]
     public class Colaboradores
     {
         #region Member Variables
@@ -32,72 +35,78 @@ namespace DL
         /// <summary>
         /// Verifica se o colaborador ja se encontra na lista de colaboradores
         /// </summary>
-        /// <param name="c">Colaborador</param>
+        /// <param name="codigoCol">Codigo do Colaborador</param>
         /// <returns></returns>
-        public static bool VerificaExisteColaborador(ColaboradorDL c)
+        public static int VerificaExisteColaborador(int codigoCol)
         {
             try
             {
-                if (colaboradores.Contains(c))
-                {
-                    return true;
-                }
-             
+                int i;
+                i = colaboradores.FindIndex(x => x.Colaborador.codigo == codigoCol);
+                return i;
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine("Error: " + e.Message);
             }
             catch (Exception e)
             {
-                throw e;
+                Console.WriteLine("Error: " + e.Message);
             }
-            return false;
+            return -1;
         }
 
         /// <summary>
         /// Adiciona um colaborador a lista de colaboradores
         /// </summary>
-        /// <param name="c"></param>
+        /// <param name="c">Colaborador</param>
         /// <returns></returns>
         public static bool AdicionaColaborador(ColaboradorDL c)
         {
             try
             {
-                if (!VerificaExisteColaborador(c))
+                if (VerificaExisteColaborador(c.Colaborador.codigo) == -1)
                 {
                     colaboradores.Add(c);
                     totColaboradores++;
                     return true;
                 }
-                else
-                {
-                    return false;
-                }
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine("Error: " + e.Message);
             }
             catch (Exception e)
             {
-                throw e;
+                Console.WriteLine("Error: " + e.Message);
             }
+            return false;
         }
 
         /// <summary>
         /// Edita o nome do colaborador
         /// </summary>
-        /// <param name="c">Colaborador</param>
+        /// <param name="codigoCol">Codigo do Colaborador</param>
         /// <param name="n">Nome</param>
         /// <returns></returns>
-        public static bool EditarColaboradorNome(ColaboradorDL c, string n)
+        public static bool EditarColaboradorNome(int codigoCol, string n)
         {
             try
             {
-
-                if (VerificaExisteColaborador(c))
+                int i = VerificaExisteColaborador(codigoCol);
+                if (i != -1)
                 {
-                    int i = colaboradores.IndexOf(c);
                     colaboradores[i].Colaborador.nome = n;
                     return true;
                 }
             }
-            catch(Exception e)
+            catch (ArgumentNullException e)
             {
-                throw e;
+                Console.WriteLine("Error: " + e.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: " + e.Message);
             }
             return false;
         }
@@ -106,16 +115,15 @@ namespace DL
         /// <summary>
         /// ALtera o estado do colaborador
         /// </summary>
-        /// <param name="c">Colaborador</param>
+        /// <param name="codigoCol">Codigo do Colaborador</param>
         /// <returns></returns>
-        public static bool AlterarColaboradorEstado(ColaboradorDL c)
+        public static bool AlterarColaboradorEstado(int codigoCol)
         {
             try
             {
-
-                if (VerificaExisteColaborador(c))
+                int i = VerificaExisteColaborador(codigoCol);
+                if (i != -1)
                 {
-                    int i = colaboradores.IndexOf(c);
                     if(colaboradores[i].Estado == ColaboradorDL.EstadoCol.ATIVO)
                     {
                         colaboradores[i].Estado = ColaboradorDL.EstadoCol.INATIVO;
@@ -128,9 +136,13 @@ namespace DL
                     }
                 }
             }
+            catch(ArgumentNullException e)
+            {
+                Console.WriteLine("Error: " + e.Message);
+            }
             catch (Exception e)
             {
-                throw e;
+                Console.WriteLine("Error: " + e.Message);
             }
             return false;
         }
@@ -143,6 +155,95 @@ namespace DL
             colaboradores.ForEach(Console.WriteLine);
         }
 
+        /// <summary>
+        /// Remove todos os elementos da lista de colaboradores 
+        /// </summary>
+        public static void ClearColaboradores()
+        {
+            colaboradores.Clear();
+        }
         #endregion
+
+        #region Ficheiros
+        /// <summary>
+        /// Guardar colaboradores num ficheiro binario
+        /// </summary>
+        /// <param name="fileName">Ficheiro</param>
+        /// <returns></returns>
+        public static bool SaveColaboradores(string fileName)
+        {
+            if (File.Exists(fileName))
+            {
+                try
+                {
+                    Stream stream = File.Open(fileName, FileMode.Create);
+                    BinaryFormatter bin = new BinaryFormatter();
+                    bin.Serialize(stream, colaboradores);
+                    stream.Close();
+                    return true;
+                }
+                catch (IOException e)
+                {
+                    Console.Write("Error: " + e.Message);
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine("Error: " + e.Message);
+                }
+                return false;
+            }
+            else
+            {
+                try
+                {
+                    Stream stream = File.Create(fileName);
+                    BinaryFormatter bin = new BinaryFormatter();
+                    bin.Serialize(stream, colaboradores);
+                    stream.Close();
+                    return true;
+
+                }
+                catch (IOException e)
+                {
+                    Console.Write("Error:" + e.Message);
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine("Error: " + e.Message);
+                }
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Carrega a lista de colaboradores
+        /// </summary>
+        /// <param name="fileName">Ficheiro</param>
+        /// <returns></returns>
+        public static bool LoadColaboradores(string fileName)
+        {
+            if (File.Exists(fileName))
+            {
+                try
+                {
+                    Stream stream = File.Open(fileName, FileMode.Open);
+                    BinaryFormatter bin = new BinaryFormatter();
+                    colaboradores = (List<ColaboradorDL>)bin.Deserialize(stream);
+                    stream.Close();
+                    return true;
+                }
+                catch (IOException e)
+                {
+                    Console.WriteLine("Error: " + e.Message);
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine("Error: " + e.Message);
+                }
+            }
+            return false;
+        }
+        #endregion
+
     }
 }

@@ -56,10 +56,6 @@
       <Project>{6c1924e8-86bf-4a32-9c99-d574c3e328a3}</Project>
       <Name>BO</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DL\Exc.csproj">
-      <Project>{b7c3684f-fff3-4c1f-94e1-eaef95ceb946}</Project>
-      <Name>Exc</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />

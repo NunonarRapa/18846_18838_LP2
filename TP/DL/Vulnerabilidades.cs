@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace DL
 {
+    [Serializable]
     public class Vulnerabilidades
     {
         #region MemberVariables
@@ -24,6 +27,11 @@ namespace DL
         {
             get { return totVulnerabilidades; }
         }
+
+        public static List<VulnerabilidadeDL> LstVulnerabilidades
+        {
+            get { return vulnerabilidades; }
+        }
         #endregion
 
         #region Functions
@@ -32,23 +40,23 @@ namespace DL
         /// </summary>
         /// <param name="v"></param>
         /// <returns></returns>
-        public static bool VerificaExisteVulnerabilidade(VulnerabilidadeDL v)
+        public static int VerificaExisteVulnerabilidade(int codigoVul)
         {
             try
             {
-                if (vulnerabilidades.Contains(v))
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                int i;
+                i = vulnerabilidades.FindIndex(x => x.Vulnerabilidade.codigo == codigoVul);
+                return i;
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine("Error: " + e.Message);
             }
             catch (Exception e)
             {
-                throw e;
+                Console.WriteLine("Error: " + e.Message);
             }
+            return -1;
         }
 
         /// <summary>
@@ -59,20 +67,23 @@ namespace DL
         public static bool AdicionaVulnerabilidade(VulnerabilidadeDL v)
         {
             try
-            { 
-                if (!VerificaExisteVulnerabilidade(v))
+            {
+                if (VerificaExisteVulnerabilidade(v.Vulnerabilidade.codigo) == -1)
                 {
                     vulnerabilidades.Add(v);
                     totVulnerabilidades++;
                     return true;
                 }
-
-                return false;
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine("Error: " + e.Message);
             }
             catch (Exception e)
             {
-                throw e;
+                Console.WriteLine("Error: " + e.Message);
             }
+            return false;
         }
 
         /// <summary>
@@ -80,13 +91,13 @@ namespace DL
         /// </summary>
         /// <param name="v"></param>
         /// <returns></returns>
-        public static bool AlteraVulnerabilidadeEstado(VulnerabilidadeDL v)
+        public static bool AlteraVulnerabilidadeEstado(int codigoVul)
         {
             try
             {
-                if (VerificaExisteVulnerabilidade(v))
+                int i = VerificaExisteVulnerabilidade(codigoVul);
+                if (i != -1)
                 {
-                    int i = vulnerabilidades.IndexOf(v);
                     if (vulnerabilidades[i].Estado == VulnerabilidadeDL.EstadoVul.ATIVO)
                     {
                         vulnerabilidades[i].Estado = VulnerabilidadeDL.EstadoVul.INATIVO;
@@ -99,9 +110,13 @@ namespace DL
                     }
                 }
             }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine("Error: " + e.Message);
+            }
             catch (Exception e)
             {
-                throw e;
+                Console.WriteLine("Error: " + e.Message);
             }
             return false;
         }
@@ -112,20 +127,24 @@ namespace DL
         /// <param name="v">Vulnerabilidade</param>
         /// <param name="n">Nivel de Impacto</param>
         /// <returns></returns>
-        public static bool AlteraVulnerabilidadeNivelImpacto(VulnerabilidadeDL v, string n)
+        public static bool AlteraVulnerabilidadeNivelImpacto(int codigoVul, string n)
         {
             try
             {
-                if (VerificaExisteVulnerabilidade(v))
+                int i = VerificaExisteVulnerabilidade(codigoVul);
+                if (i != -1)
                 {
-                    int i = vulnerabilidades.IndexOf(v);
-                    vulnerabilidades[i].Vulnerabilidade.NivelImpacto = n;
+                    vulnerabilidades[i].Vulnerabilidade.nivelImpacto = n;
                     return true;
                 }
             }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine("Error: " + e.Message);
+            }
             catch (Exception e)
             {
-                throw e;
+                Console.WriteLine("Error: " + e.Message);
             }
             return false;
         }
@@ -136,19 +155,24 @@ namespace DL
         /// <param name="v"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static bool AlteraVulnerabilidadeDescricao(VulnerabilidadeDL v, string n)
+        public static bool AlteraVulnerabilidadeDescricao(int codigoVul, string n)
         {
             try
             {
-                if (VerificaExisteVulnerabilidade(v))
+                int i = VerificaExisteVulnerabilidade(codigoVul);
+                if (i != -1)
                 {
-                    int i = vulnerabilidades.IndexOf(v);
-                    vulnerabilidades[i].Vulnerabilidade.Descricao = n;
+                    vulnerabilidades[i].Vulnerabilidade.descricao = n;
+                    return true;
                 }
+            }
+            catch (ArgumentNullException e)
+            {
+                Console.WriteLine("Error: " + e.Message);
             }
             catch (Exception e)
             {
-                throw e;
+                Console.WriteLine("Error: " + e.Message);
             }
             return false;
         }
@@ -160,8 +184,95 @@ namespace DL
         {
             vulnerabilidades.ForEach(Console.WriteLine);
         }
+
+        /// <summary>
+        /// Remove todos os elementos da lista de vulnerabilidades
+        /// </summary>
+        public static void ClearVulnerabilidades()
+        {
+            vulnerabilidades.Clear();
+        }
         #endregion
 
+        #region Ficheiros
+        /// <summary>
+        /// Guardar vulnerabilidades num ficheiro binario
+        /// </summary>
+        /// <param name="fileName">Ficheiro</param>
+        /// <returns></returns>
+        public static bool SaveVulnerabilidades(string fileName)
+        {
+            if (File.Exists(fileName))
+            {
+                try
+                {
+                    Stream stream = File.Open(fileName, FileMode.Create);
+                    BinaryFormatter bin = new BinaryFormatter();
+                    bin.Serialize(stream, vulnerabilidades);
+                    stream.Close();
+                    return true;
+                }
+                catch (IOException e)
+                {
+                    Console.Write("ERRO:" + e.Message);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error: " + e.Message);
+                }
+                return false;
+            }
+            else
+            {
+                try
+                {
+                    Stream stream = File.Create(fileName);
+                    BinaryFormatter bin = new BinaryFormatter();
+                    bin.Serialize(stream, vulnerabilidades);
+                    stream.Close();
+                    return true;
 
+                }
+                catch (IOException ex)
+                {
+                    Console.Write("ERRO:" + ex.Message);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error: " + e.Message);
+                }
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Carrega a lista de vulnerabilidades
+        /// </summary>
+        /// <param name="fileName">Ficheiro</param>
+        /// <returns></returns>
+        public static bool LoadVulnerabilidades(string fileName)
+        {
+            if (File.Exists(fileName))
+            {
+                try
+                {
+                    Stream stream = File.Open(fileName, FileMode.Open);
+                    BinaryFormatter bin = new BinaryFormatter();
+                    vulnerabilidades = (List<VulnerabilidadeDL>)bin.Deserialize(stream);
+                    stream.Close();
+                    return true;
+                }
+                catch (IOException e)
+                {
+                    Console.Write("ERRO:" + e.Message);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error: " + e.Message);
+                }
+            }
+            return false;
+        }
+        #endregion
     }
 }

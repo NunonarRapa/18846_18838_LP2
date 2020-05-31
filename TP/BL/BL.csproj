@@ -49,11 +49,7 @@
       <Project>{6c1924e8-86bf-4a32-9c99-d574c3e328a3}</Project>
       <Name>BO</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DL\Exc.csproj">
-      <Project>{b7c3684f-fff3-4c1f-94e1-eaef95ceb946}</Project>
-      <Name>Exc</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Exceptions\DL.csproj">
+    <ProjectReference Include="..\DL\DL.csproj">
       <Project>{3cb15bee-3f58-4803-8649-2ad34cf7664d}</Project>
       <Name>DL</Name>
     </ProjectReference>

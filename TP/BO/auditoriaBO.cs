@@ -6,22 +6,23 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+    [Serializable]
     public class auditoriaBO
     {
         #region Attributes 
         public int codigo;
         public DateTime data;
         public float duracao;
-        public colaboradorBO colaborador;
+        public int codigoColaborador;
         #endregion
 
         #region Constructors
-        public auditoriaBO(int totaud, DateTime dt, float dur, colaboradorBO col)
+        public auditoriaBO(int totaud, DateTime dt, float dur, int codigoCol)
         {
             codigo =  totaud + 1;
             data = dt;
             duracao = dur;
-            colaborador = col;
+            codigoColaborador = codigoCol;
         }
         #endregion
 
@@ -47,7 +48,7 @@ namespace BO
       
         public override string ToString()
         {
-            return string.Format("Codigo: {0} \nData: {1} \nDuracao: {2}\n{3}\n", codigo, data, duracao, colaborador.ToString());
+            return string.Format("Codigo: {0} \nData: {1} \nDuracao: {2}\nCodigo Colaborador Responsavel: {3}\n", codigo.ToString(), data.ToString(), duracao.ToString(), codigoColaborador.ToString());
         }
     }
 }

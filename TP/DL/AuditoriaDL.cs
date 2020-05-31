@@ -5,26 +5,20 @@ using BO;
 
 
 namespace DL
-{
+{   
+    [Serializable]
     public class AuditoriaDL
     {
         #region MemberVariables 
         private auditoriaBO auditoria;
-        private List<VulnerabilidadeDL> vul;
+        private List<int> codigosVul;
         #endregion
 
         #region Constructors
         public AuditoriaDL(auditoriaBO a)
         {
             auditoria = a;
-            vul = new List<VulnerabilidadeDL>();
-        }
-
-        public AuditoriaDL(auditoriaBO a, VulnerabilidadeDL v)
-        {
-            auditoria = a;
-            vul = new List<VulnerabilidadeDL>();
-            vul.Add(v);
+            codigosVul = new List<int>();
         }
         #endregion
 
@@ -32,6 +26,11 @@ namespace DL
         public auditoriaBO Auditoria
         {
             get { return auditoria; }
+        }
+
+        public List<int> CodigosVul
+        {
+            get { return codigosVul; }
         }
         #endregion
 
@@ -44,7 +43,7 @@ namespace DL
 
         public override string ToString()
         {
-            return string.Format(auditoria.ToString()); ;
+            return string.Format(auditoria.ToString() + "Numero de Vulnerabilidades: " + codigosVul.Count + "\n"); 
         }
         #endregion
 
@@ -59,5 +58,21 @@ namespace DL
             return (!a1.Equals(a2));
         }
         #endregion
+    }
+
+    public class SortVulAudCresc : IComparer<AuditoriaDL>
+    {
+        public int Compare(AuditoriaDL a1, AuditoriaDL a2)
+        {
+            return a1.CodigosVul.Count - a2.CodigosVul.Count;
+        }
+    }
+
+    public class SortVulAudDec : IComparer<AuditoriaDL>
+    {
+        public int Compare(AuditoriaDL a1, AuditoriaDL a2)
+        {
+            return a2.CodigosVul.Count - a1.CodigosVul.Count;
+        }
     }
 }

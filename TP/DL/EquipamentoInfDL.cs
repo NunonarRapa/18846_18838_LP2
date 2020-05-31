@@ -5,11 +5,12 @@ using BO;
 
 namespace DL
 {
+    [Serializable]
     public class EquipamentoInfDL
     {
         #region MemberVariables 
         private EquipamentoInfBO equipInf;
-        private static List<VulnerabilidadeDL> vulnerabilidades;
+        private List<int> codigosVul;
         
         #endregion
 
@@ -18,7 +19,7 @@ namespace DL
         public EquipamentoInfDL(EquipamentoInfBO equip)
         {
             equipInf = equip;
-            vulnerabilidades = new List<VulnerabilidadeDL>();
+            codigosVul = new List<int>();
         }
 
 
@@ -29,10 +30,14 @@ namespace DL
         {
             get { return equipInf; }
         }
+
+        public List<int> CodigoVulnerabilidades
+        {
+            get { return codigosVul; }
+        }
         #endregion 
 
         #region Overrides
-
         public override bool Equals(object obj)
         {
             EquipamentoInfDL aux = (EquipamentoInfDL)obj;
@@ -41,7 +46,7 @@ namespace DL
 
         public override string ToString()
         {
-            return string.Format("{0}", equipInf.ToString());
+            return string.Format("{0} Numero de Vulnerabilidades: {1}\n", equipInf.ToString(), codigosVul.Count);
         }
 
         #endregion
@@ -59,4 +64,21 @@ namespace DL
         }
         #endregion
     }
+
+    public class SortVulEquipDec : IComparer<EquipamentoInfDL>
+    {
+        public int Compare(EquipamentoInfDL e1, EquipamentoInfDL e2)
+        {
+            return e2.CodigoVulnerabilidades.Count - e1.CodigoVulnerabilidades.Count;
+        }
+    }
+
+    public class SortVulEquipCresc : IComparer<EquipamentoInfDL>
+    {
+        public int Compare(EquipamentoInfDL e1, EquipamentoInfDL e2)
+        {
+            return e1.CodigoVulnerabilidades.Count - e2.CodigoVulnerabilidades.Count;
+        }
+    }
+
 }

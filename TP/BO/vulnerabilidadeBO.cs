@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+    [Serializable]
     public class vulnerabilidadeBO
     {
         #region Member Variables
@@ -51,7 +52,7 @@ namespace BO
         #region Overrides
         public override string ToString()
         {
-            return string.Format("Codigo: {0} \nDescricao: {1} \nNivel Impacto: {2}", codigo, descricao, nivelImpacto);
+            return string.Format("Codigo: {0} \nDescricao: {1} \nNivel Impacto: {2}", codigo.ToString(), descricao, nivelImpacto);
         }
         #endregion
     }

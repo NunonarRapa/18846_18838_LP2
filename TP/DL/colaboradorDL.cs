@@ -5,6 +5,7 @@ using BO;
 
 namespace DL
 {
+    [Serializable]
     public class ColaboradorDL
     {
         #region MemberVariables

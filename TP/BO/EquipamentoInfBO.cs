@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+    [Serializable]
     public class EquipamentoInfBO
     {
         #region Member Variables
@@ -19,14 +20,13 @@ namespace BO
         #region Constructors
         public EquipamentoInfBO(int c, string t, string mar, string mod, DateTime dt)
         {
-            codigo = c;
+            codigo = c + 1;
             tipo = t;
             marca = mar;
             modelo = mod;
             dataAquisicao = dt;
         }
         #endregion
-
 
         #region Properties 
         public int Codigo
@@ -62,7 +62,7 @@ namespace BO
         #region Overrides
         public override string ToString()
         {
-            return string.Format("Codigo: {0} \nTipo: {1} \nMarca: {2} \nModelo: {3} \nData: {4}\n", codigo, tipo, marca, modelo, dataAquisicao);
+            return string.Format("Codigo: {0} \nTipo: {1} \nMarca: {2} \nModelo: {3} \nData Aquisicao: {4}\n", codigo.ToString(), tipo, marca, modelo, dataAquisicao.ToString());
         }
         #endregion
     }

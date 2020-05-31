@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+    [Serializable]
     public class colaboradorBO
     {
         #region Member Variables
@@ -38,7 +39,7 @@ namespace BO
 
         public override string ToString()
         {
-            return string.Format("Colaborador: {0} \nCodigo: {1} \n", nome, codigo);
+            return string.Format("Colaborador: {0} \nCodigo: {1} \n", nome, codigo.ToString());
         }
     }
 }

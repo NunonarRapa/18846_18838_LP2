@@ -5,6 +5,7 @@ using BO;
 
 namespace DL
 {
+    [Serializable]
     public class VulnerabilidadeDL
     {
         #region MemberVariables
@@ -42,7 +43,6 @@ namespace DL
         #endregion
 
         #region Overrides
-
         public override bool Equals(object obj)
         {
             VulnerabilidadeDL aux = (VulnerabilidadeDL)obj;
@@ -51,12 +51,9 @@ namespace DL
 
         public override string ToString()
         {
-            return string.Format("{0}\nEstado: {1}\n", vulnerabilidade.ToString(), estado);
+            return string.Format("{0}\nEstado: {1}\n", vulnerabilidade.ToString(), estado.ToString());
         }
-
         #endregion
-
-      
 
         #region Operators
 
@@ -70,8 +67,6 @@ namespace DL
             return (!v1.Equals(v2));
         }
 
-        #endregion
-
-        
+        #endregion  
     }
 }
